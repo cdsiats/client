@@ -4,8 +4,6 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Button } from '$lib/components/ui/button';
 	import { Separator } from '$lib/components/ui/separator';
-
-	export let data: PageData;
 </script>
 
 <div class="flex h-screen flex-row">
@@ -23,16 +21,16 @@
 				>Login with your account to get started or create one if you haven't yet.</small
 			>
 		</div>
-		<form action="" class="mt-5 flex flex-col gap-6">
+		<form method="POST" action="?/signIn" class="mt-5 flex flex-col gap-6">
 			<div class="flex flex-col gap-4">
 				<Label>Email Address</Label>
-				<Input type="email" required />
+				<Input name="email" type="email" required />
 			</div>
 			<div class="flex flex-col gap-4">
 				<Label>Password</Label>
-				<Input type="password" required />
+				<Input name="password" type="password" required />
 			</div>
-			<Button class="w-full" size="lg">Sign in</Button>
+			<Button type="submit" class="w-full" size="lg">Sign in</Button>
 		</form>
 		<Separator class="mt-5" orientation="horizontal" />
 

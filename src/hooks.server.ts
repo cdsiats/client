@@ -20,19 +20,35 @@ const pocketbase: Handle = async ({event, resolve}) => {
 
     const response = await resolve(event);
 
-    response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie());
+    response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie({sameSite:'lax', secure: true}));
 
     return response;
 }
 
 const authGuard: Handle = async ({event, resolve}) => {
+    /**
+     *  If the user's authentication is not valid and the current route starts with '/(protected)',
+     *  redirect the user to the '/auth' route with a 303 status code.
+     */
     if(!event.locals.pb.authStore.isValid && event.route.id?.startsWith('/(protected)')) {
         redirect(303,'/auth')
     }
+
+    /**
+     *  If the user's auth token is valid and the current route is '/auth',
+     *  redirect the user to their respective dashboard.
+     */
     if(event.locals.pb.authStore.isValid && event.route.id == '/auth') {
-        redirect(303, '/student')
+        redirect(303, `/${event.locals.user?.role}`)
     }
 
+    /**
+     *  If the user's auth token is valid and the current route does not match their role,
+     *  redirect the user to their respective dashboard.
+     */
+    if(event.locals.pb.authStore.isValid && event.url.pathname != `/${event.locals.user?.role}`) {
+        redirect(303, `/${event.locals.user?.role}`)
+    }
 
     return resolve(event);
 

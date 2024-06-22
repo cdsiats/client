@@ -9,27 +9,28 @@
 </script>
 
 <div class="flex h-screen flex-row">
-	<div class="bg-primary flex w-1/2 flex-col justify-center p-20">
+	<div class="bg-primary flex w-1/2 flex-col justify-center p-20 max-sm:hidden">
 		<p class="text-primary-foreground flex flex-col gap-2 text-6xl font-bold">
-			<span>Welcome</span>
-			<span>Back!</span>
+			Welcome
+			<br />
+			Back!
 		</p>
 	</div>
-	<div class="w-1/2 p-20">
+	<div class="flex flex-col justify-center p-20 sm:w-1/2">
 		<div class="flex flex-col gap-2">
 			<p class="text-3xl font-bold">Login</p>
 			<small class="text-muted-foreground"
-				>Login with your account to get started or Create an account if you don't have one</small
+				>Login with your account to get started or create one if you haven't yet.</small
 			>
 		</div>
 		<form action="" class="mt-5 flex flex-col gap-6">
 			<div class="flex flex-col gap-4">
 				<Label>Email Address</Label>
-				<Input required />
+				<Input type="email" required />
 			</div>
 			<div class="flex flex-col gap-4">
 				<Label>Password</Label>
-				<Input required />
+				<Input type="password" required />
 			</div>
 			<Button class="w-full" size="lg">Sign in</Button>
 		</form>

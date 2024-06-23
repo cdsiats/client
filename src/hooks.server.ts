@@ -46,7 +46,7 @@ const authGuard: Handle = async ({event, resolve}) => {
      *  If the user's auth token is valid and the current route does not match their role,
      *  redirect the user to their respective dashboard.
      */
-    if(event.locals.pb.authStore.isValid && event.url.pathname != `/${event.locals.user?.role}`) {
+    if(event.locals.pb.authStore.isValid && !event.url.pathname.startsWith(`/${event.locals.user?.role}`)) {
         redirect(303, `/${event.locals.user?.role}`)
     }
 

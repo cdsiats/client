@@ -1,1 +1,1 @@
-Student page
+Student Home Page
